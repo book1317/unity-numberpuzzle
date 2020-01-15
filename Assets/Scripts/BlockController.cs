@@ -41,7 +41,7 @@ public class BlockController : MonoBehaviour
 
     void OnMouseUp()
     {
-        if (theLevel.currentGameState == LevelController.GameState.Playing)
+        if (theLevel.currentGameState == LevelController.GameState.Playing || theLevel.currentGameState == LevelController.GameState.MainMenu)
         {
             finalTouchPoition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             CalculateAngle();
@@ -92,6 +92,8 @@ public class BlockController : MonoBehaviour
 
         if (canLerp)
         {
+            if (theLevel.currentGameState == LevelController.GameState.MainMenu)
+                theLevel.currentGameState = LevelController.GameState.Playing;
             theLevel.IncreaseMoveCount();
             SetGrid(lastX, lastY, 0);
             SetGrid(x, y, number);

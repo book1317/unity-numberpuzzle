@@ -7,9 +7,9 @@ public class LevelController : MonoBehaviour
 {
     public enum GameState
     {
-        Playing, Wining
+        MainMenu, Playing, Wining
     }
-    public GameState currentGameState = GameState.Playing;
+    public GameState currentGameState = GameState.MainMenu;
     const int GRID_WIDTH = 4;
     const int GRID_HEIGHT = 4;
     float girdLenght = 2.0f;
@@ -40,7 +40,7 @@ public class LevelController : MonoBehaviour
     {
         if (currentGameState == GameState.Playing)
         {
-            TimeCount += Time.fixedDeltaTime * 10f;
+            TimeCount += Time.fixedDeltaTime;
             UpdateTimeCountText(timeCountText);
         }
     }
@@ -49,25 +49,9 @@ public class LevelController : MonoBehaviour
     {
         int minute = (int)TimeCount / 60;
         int second = (int)TimeCount % 60;
-
-        if (minute >= 10)
-        {
-            if (second < 10)
-                theText.text = "Time : " + minute + ":0" + second;
-            else if (second < 60)
-                theText.text = "Time : " + minute + ":" + second;
-        }
-        else if (minute >= 1)
-        {
-            if (second < 10)
-                theText.text = "Time : 0" + minute + ":0" + second;
-            else if (second < 60)
-                theText.text = "Time : 0" + minute + ":" + second;
-        }
-        else if (second < 10)
-            theText.text = "Time : 00:0" + second;
-        else if (second < 60)
-            theText.text = "Time : 00:" + second;
+        int fraction = (int)(TimeCount * 100);
+        fraction = fraction % 100;
+        theText.text = "Time : " + minute.ToString("00") + ":" + second.ToString("00") + ":" + fraction.ToString("00");
     }
 
     void ShowAllGrid()
@@ -160,7 +144,7 @@ public class LevelController : MonoBehaviour
         UpdateTimeCountText(timeCountText);
         RemoveBlock();
         InitBlock();
-        currentGameState = GameState.Playing;
+        currentGameState = GameState.MainMenu;
     }
 
     public void IncreaseMoveCount()
