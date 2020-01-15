@@ -3,6 +3,7 @@ This is a challenge in creating games to improve my skills.
 
  ## Day8 : NumberPuzzle
  
+ ![GitHub Logo](/images/Image1.png)
 **Let's play : https://book1317.github.io/unity-numberpuzzle/**
 
 ## Other Projects
